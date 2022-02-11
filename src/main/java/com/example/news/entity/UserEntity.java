@@ -1,8 +1,8 @@
 package com.example.news.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")   
@@ -15,6 +15,12 @@ public class UserEntity extends BaseEntity{
     private String fullName;
     @Column
     private Integer status;
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<RoleEntity> roles = new ArrayList<>();
 
     public String getUserName() {
         return userName;
@@ -46,5 +52,13 @@ public class UserEntity extends BaseEntity{
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

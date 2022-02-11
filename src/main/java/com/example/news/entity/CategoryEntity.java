@@ -2,8 +2,11 @@ package com.example.news.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -13,6 +16,9 @@ public class CategoryEntity extends BaseEntity {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<NewEntity> news = new ArrayList<>();
 
     public String getCode() {
         return code;
@@ -28,5 +34,13 @@ public class CategoryEntity extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<NewEntity> getNews() {
+        return news;
+    }
+
+    public void setNews(List<NewEntity> news) {
+        this.news = news;
     }
 }

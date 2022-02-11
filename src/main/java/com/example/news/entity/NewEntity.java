@@ -1,11 +1,9 @@
 package com.example.news.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "news")
+@Table(name = "new")
 public class NewEntity extends BaseEntity{
     @Column(name = "title")
     private String title;
@@ -18,6 +16,18 @@ public class NewEntity extends BaseEntity{
 
     @Column(name = "content")
     private String content;
+
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
+
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;
@@ -50,4 +60,6 @@ public class NewEntity extends BaseEntity{
     public void setContent(String content) {
         this.content = content;
     }
+
+
 }
