@@ -1,27 +1,21 @@
-package com.example.news.entity;
+package com.example.news.dto;
 
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AbstractDTO<T> {
     private Long id;
-    @Column
-    @CreatedDate
     private Date createdAt;
-    @Column
-    @UpdateTimestamp
     private Date updatedAt;
+    private List<T> listResult = new ArrayList<>();
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getCreatedAt() {
@@ -38,5 +32,13 @@ public class BaseEntity {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<T> getListResult() {
+        return listResult;
+    }
+
+    public void setListResult(List<T> listResult) {
+        this.listResult = listResult;
     }
 }
